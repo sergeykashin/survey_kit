@@ -13,10 +13,12 @@ part 'media_step.g.dart';
 class MediaStep extends Step {
   final String title;
   final String text;
+  final String imageUrl;
 
   MediaStep({
     required this.title,
     required this.text,
+    required this.imageUrl,
     bool isOptional = false,
     String buttonText = 'Next',
     StepIdentifier? stepIdentifier,
@@ -47,6 +49,7 @@ class MediaStep extends Step {
       super == (o) &&
       o is MediaStep &&
       o.title == title &&
+      o.imageUrl == imageUrl &&
       o.text == text;
-  int get hashCode => super.hashCode ^ title.hashCode ^ text.hashCode;
+  int get hashCode => super.hashCode ^ title.hashCode ^ text.hashCode ^ imageUrl.hashCode ;
 }

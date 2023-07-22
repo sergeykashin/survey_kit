@@ -27,11 +27,19 @@ class MediaView extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0),
-        child: Text(
-          mediaStep.text,
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.center,
-        ),
+        child:SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+              mediaStep.text,
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            Image.network(mediaStep.imageUrl),
+            ]
+          )
+        )
       ),
     );
   }

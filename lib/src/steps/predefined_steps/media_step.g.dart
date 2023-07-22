@@ -9,6 +9,7 @@ part of 'media_step.dart';
 MediaStep _$MediaStepFromJson(Map<String, dynamic> json) => MediaStep(
       title: json['title'] as String,
       text: json['text'] as String,
+      imageUrl: json['imageUrl'] as String,
       isOptional: json['isOptional'] as bool? ?? false,
       buttonText: json['buttonText'] as String? ?? 'Next',
       stepIdentifier: json['stepIdentifier'] == null
@@ -29,4 +30,5 @@ Map<String, dynamic> _$MediaStepToJson(MediaStep instance) => <String, dynamic>{
       'showAppBar': instance.showAppBar,
       'title': instance.title,
       'text': instance.text,
+      'imageUrl': instance.imageUrl,
     };
