@@ -6,19 +6,19 @@ import 'package:survey_kit/src/steps/identifier/step_identifier.dart';
 import 'package:survey_kit/src/views/instruction_view.dart';
 
 import '../../views/media_view.dart';
+import 'step_content.dart';
 
 part 'media_step.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class MediaStep extends Step {
   final String title;
-  final String text;
-  final String imageUrl;
+  final List<StepContent> elements;
+
 
   MediaStep({
     required this.title,
-    required this.text,
-    required this.imageUrl,
+    required this.elements,
     bool isOptional = false,
     String buttonText = 'Next',
     StepIdentifier? stepIdentifier,
@@ -45,11 +45,15 @@ class MediaStep extends Step {
       _$MediaStepFromJson(json);
   Map<String, dynamic> toJson() => _$MediaStepToJson(this);
 
-  bool operator ==(o) =>
-      super == (o) &&
-      o is MediaStep &&
-      o.title == title &&
-      o.imageUrl == imageUrl &&
-      o.text == text;
-  int get hashCode => super.hashCode ^ title.hashCode ^ text.hashCode ^ imageUrl.hashCode ;
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is MediaStep &&
+          runtimeType == other.runtimeType &&
+          title == other.title &&
+          elements == other.elements;
+
+  @override
+  int get hashCode => super.hashCode ^ title.hashCode ^ elements.hashCode;
 }

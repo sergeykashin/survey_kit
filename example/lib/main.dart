@@ -171,8 +171,10 @@ class _MyAppState extends State<MyApp> {
         ),
         MediaStep(
           title: 'Медиа шаг',
-          text: 'Get ready for a bunch of super random questions!',
-          imageUrl: 'https://pro-bike.ru/data/images/posts/47/33047/555.jpg',
+          elements : [
+            StepContent(type: Type.text,content: 'Pinarello dogma'),
+            StepContent(type: Type.image,content: 'https://pro-bike.ru/data/images/posts/47/33047/555.jpg')
+          ],
           buttonText: 'Let\'s go!',
         ),
         QuestionStep(

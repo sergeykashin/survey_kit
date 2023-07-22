@@ -8,8 +8,9 @@ part of 'media_step.dart';
 
 MediaStep _$MediaStepFromJson(Map<String, dynamic> json) => MediaStep(
       title: json['title'] as String,
-      text: json['text'] as String,
-      imageUrl: json['imageUrl'] as String,
+      elements: (json['elements'] as List<dynamic>)
+          .map((e) => StepContent.fromJson(e as Map<String, dynamic>))
+          .toList(),
       isOptional: json['isOptional'] as bool? ?? false,
       buttonText: json['buttonText'] as String? ?? 'Next',
       stepIdentifier: json['stepIdentifier'] == null
@@ -29,6 +30,5 @@ Map<String, dynamic> _$MediaStepToJson(MediaStep instance) => <String, dynamic>{
       'showProgress': instance.showProgress,
       'showAppBar': instance.showAppBar,
       'title': instance.title,
-      'text': instance.text,
-      'imageUrl': instance.imageUrl,
+      'elements': instance.elements.map((e) => e.toJson()).toList(),
     };
