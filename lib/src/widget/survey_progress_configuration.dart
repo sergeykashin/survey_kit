@@ -30,10 +30,10 @@ class SurveyProgressConfiguration {
   final BorderRadius? borderRadius;
 
   SurveyProgressConfiguration({
-    this.progressbarColor = Colors.white,
+    this.progressbarColor = Colors.blueGrey,
     this.height = 6.0,
     this.padding = const EdgeInsets.symmetric(horizontal: 24.0),
-    this.showLabel = false,
+    this.showLabel = true,
     this.borderRadius,
     this.label,
     this.backgroundColor,

@@ -24,11 +24,11 @@ class _MyAppState extends State<MyApp> {
           child: Align(
             alignment: Alignment.center,
             child: FutureBuilder<Task>(
-              future: getJsonTask(),
+              future: getSampleTask(),//getJsonTask(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done &&
                     snapshot.hasData &&
-                    snapshot.data != null) {
+                    snapshot.data != null)  {
                   final task = snapshot.data!;
                   return SurveyKit(
                     onResult: (SurveyResult result) {
@@ -147,6 +147,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     surveyProgressbarConfiguration: SurveyProgressConfiguration(
                       backgroundColor: Colors.white,
+                      label: getLabel()
                     ),
                   );
                 }
@@ -164,15 +165,21 @@ class _MyAppState extends State<MyApp> {
       id: TaskIdentifier(),
       steps: [
         InstructionStep(
-          title: 'Welcome to the\nQuickBird Studios\nHealth Survey',
+          title: 'Простой опрос\nQuickBird Studios\nHealth Survey',
+          text: 'Get ready for a bunch of super random questions!',
+          buttonText: 'Let\'s go!',
+        ),
+        MediaStep(
+          title: 'Медиа шаг',
           text: 'Get ready for a bunch of super random questions!',
           buttonText: 'Let\'s go!',
         ),
         QuestionStep(
-          title: 'How old are you?',
+          title: 'Сколько вам лет?',
+//          label: "Возраст",
           answerFormat: IntegerAnswerFormat(
             defaultValue: 25,
-            hint: 'Please enter your age',
+            hint: 'Введите ваш возраст',
           ),
           isOptional: true,
         ),
@@ -195,7 +202,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         QuestionStep(
-          title: 'Select your body type',
+          title: 'На сколько ты толстый?',
           answerFormat: ScaleAnswerFormat(
             step: 1,
             minimumValue: 1,
@@ -206,7 +213,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         QuestionStep(
-          title: 'Known allergies',
+          title: 'На что у вас аллергия',
           text: 'Do you have any allergies that we should be aware of?',
           isOptional: false,
           answerFormat: MultipleChoiceAnswerFormat(
@@ -224,7 +231,7 @@ class _MyAppState extends State<MyApp> {
           isOptional: true,
           answerFormat: SingleChoiceAnswerFormat(
             textChoices: [
-              TextChoice(text: 'Yes', value: 'Yes'),
+              TextChoice(text: 'Y es', value: 'Yes'),
               TextChoice(text: 'No', value: 'No'),
             ],
             defaultSelection: TextChoice(text: 'No', value: 'No'),
@@ -279,4 +286,7 @@ class _MyAppState extends State<MyApp> {
 
     return Task.fromJson(taskMap);
   }
+
+  getLabel
+      () {"a1";"a2";}
 }

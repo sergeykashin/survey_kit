@@ -16,7 +16,7 @@ ImageQuestionResult _$ImageQuestionResultFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$ImageQuestionResultToJson(
-        ImageQuestionResult instance) =>
+    ImageQuestionResult instance) =>
     <String, dynamic>{
       'id': instance.id?.toJson(),
       'startDate': instance.startDate.toIso8601String(),

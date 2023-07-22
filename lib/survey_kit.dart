@@ -48,6 +48,7 @@ export 'src/steps/identifier/step_identifier.dart';
 export 'src/steps/predefined_steps/answer_format_not_defined_exception.dart';
 export 'src/steps/predefined_steps/completion_step.dart';
 export 'src/steps/predefined_steps/instruction_step.dart';
+export 'src/steps/predefined_steps/media_step.dart';
 export 'src/steps/predefined_steps/question_step.dart';
 export 'src/steps/step.dart';
 export 'src/steps/step_not_defined_exception.dart';

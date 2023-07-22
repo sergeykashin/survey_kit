@@ -19,7 +19,7 @@ Map<String, dynamic> _$BooleanAnswerFormatToJson(
     <String, dynamic>{
       'positiveAnswer': instance.positiveAnswer,
       'negativeAnswer': instance.negativeAnswer,
-      'result': _$BooleanResultEnumMap[instance.result],
+      'result': _$BooleanResultEnumMap[instance.result]!,
     };
 
 const _$BooleanResultEnumMap = {
