@@ -13,151 +13,235 @@ class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
+class TabbedPage extends StatefulWidget {
+  @override
+  Tabscreenstate createState() => new Tabscreenstate();
+}
+
+class Tabscreenstate extends State with TickerProviderStateMixin {
+  int selectedTabIndex = 0;
+  late TabController tabController;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+    tabController.addListener(() {
+      setState(() {
+        selectedTabIndex = tabController.index;
+      });
+    });
+    super.initState();
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        tabbar(),
+        Container(color:selectedTabIndex == 0 ? Colors.red : Colors.green),
+      ],
+    );
+  }
+
+  Widget tabbar() => TabBar(
+    controller: tabController,
+    onTap: (value) {
+      setState(() {
+        selectedTabIndex = value;
+      });
+    },
+    tabs: [
+      Text("tab one"),
+      Text("tab two"),
+    ],
+  );
+}
+
 
 class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Container(
-          color: Colors.white,
-          child: Align(
-            alignment: Alignment.center,
-            child: FutureBuilder<Task>(
-              future: getSampleTask(),//getJsonTask(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done &&
-                    snapshot.hasData &&
-                    snapshot.data != null)  {
-                  final task = snapshot.data!;
-                  return SurveyKit(
-                    onResult: (SurveyResult result) {
-                      print(result.finishReason);
-                      Navigator.pushNamed(context, '/');
-                    },
-                    task: task,
-                    showProgress: true,
-                    localizations: {
-                      'cancel': 'Cancel',
-                      'next': 'Next',
-                    },
-                    themeData: Theme.of(context).copyWith(
-                      primaryColor: Colors.cyan,
-                      appBarTheme: const AppBarTheme(
-                        color: Colors.white,
-                        iconTheme: IconThemeData(
-                          color: Colors.cyan,
-                        ),
-                        titleTextStyle: TextStyle(
-                          color: Colors.cyan,
-                        ),
-                      ),
-                      iconTheme: const IconThemeData(
+        body: getContent(_selectedIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Главная',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              label: 'Инструкции',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: 'Обучение',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.task),
+              label: 'Задачи',
+            ),
+          ],
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.amber[800],
+          unselectedItemColor: Colors.black12,
+          unselectedFontSize: 14,
+          selectedFontSize: 14,
+          onTap: _onItemTapped,
+        ),
+      ),
+    );
+  }
+
+  Container getSurvey() {
+    return Container(
+        color: Colors.white,
+        child: Align(
+          alignment: Alignment.center,
+          child: FutureBuilder<Task>(
+            future: getSampleTask(),//getJsonTask(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.hasData &&
+                  snapshot.data != null)  {
+                final task = snapshot.data!;
+                return SurveyKit(
+                  onResult: (SurveyResult result) {
+                    print(result.finishReason);
+                    Navigator.pushNamed(context, '/');
+                  },
+                  task: task,
+                  showProgress: true,
+                  localizations: {
+                    'cancel': 'Cancel',
+                    'next': 'Next',
+                  },
+                  themeData: Theme.of(context).copyWith(
+                    primaryColor: Colors.cyan,
+                    appBarTheme: const AppBarTheme(
+                      color: Colors.white,
+                      iconTheme: IconThemeData(
                         color: Colors.cyan,
                       ),
-                      textSelectionTheme: TextSelectionThemeData(
-                        cursorColor: Colors.cyan,
-                        selectionColor: Colors.cyan,
-                        selectionHandleColor: Colors.cyan,
+                      titleTextStyle: TextStyle(
+                        color: Colors.cyan,
                       ),
-                      cupertinoOverrideTheme: CupertinoThemeData(
-                        primaryColor: Colors.cyan,
-                      ),
-                      outlinedButtonTheme: OutlinedButtonThemeData(
-                        style: ButtonStyle(
-                          minimumSize: MaterialStateProperty.all(
-                            Size(150.0, 60.0),
-                          ),
-                          side: MaterialStateProperty.resolveWith(
-                            (Set<MaterialState> state) {
-                              if (state.contains(MaterialState.disabled)) {
-                                return BorderSide(
-                                  color: Colors.grey,
-                                );
-                              }
+                    ),
+                    iconTheme: const IconThemeData(
+                      color: Colors.cyan,
+                    ),
+                    textSelectionTheme: TextSelectionThemeData(
+                      cursorColor: Colors.cyan,
+                      selectionColor: Colors.cyan,
+                      selectionHandleColor: Colors.cyan,
+                    ),
+                    cupertinoOverrideTheme: CupertinoThemeData(
+                      primaryColor: Colors.cyan,
+                    ),
+                    outlinedButtonTheme: OutlinedButtonThemeData(
+                      style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(
+                          Size(150.0, 60.0),
+                        ),
+                        side: MaterialStateProperty.resolveWith(
+                          (Set<MaterialState> state) {
+                            if (state.contains(MaterialState.disabled)) {
                               return BorderSide(
-                                color: Colors.cyan,
+                                color: Colors.grey,
                               );
-                            },
+                            }
+                            return BorderSide(
+                              color: Colors.cyan,
+                            );
+                          },
+                        ),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                          textStyle: MaterialStateProperty.resolveWith(
-                            (Set<MaterialState> state) {
-                              if (state.contains(MaterialState.disabled)) {
-                                return Theme.of(context)
-                                    .textTheme
-                                    .labelLarge
-                                    ?.copyWith(
-                                      color: Colors.grey,
-                                    );
-                              }
+                        ),
+                        textStyle: MaterialStateProperty.resolveWith(
+                          (Set<MaterialState> state) {
+                            if (state.contains(MaterialState.disabled)) {
                               return Theme.of(context)
                                   .textTheme
                                   .labelLarge
                                   ?.copyWith(
-                                    color: Colors.cyan,
+                                    color: Colors.grey,
                                   );
-                            },
-                          ),
-                        ),
-                      ),
-                      textButtonTheme: TextButtonThemeData(
-                        style: ButtonStyle(
-                          textStyle: MaterialStateProperty.all(
-                            Theme.of(context).textTheme.labelLarge?.copyWith(
+                            }
+                            return Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
                                   color: Colors.cyan,
-                                ),
-                          ),
+                                );
+                          },
                         ),
                       ),
-                      textTheme: TextTheme(
-                        displayMedium: TextStyle(
-                          fontSize: 28.0,
-                          color: Colors.black,
-                        ),
-                        headlineSmall: TextStyle(
-                          fontSize: 24.0,
-                          color: Colors.black,
-                        ),
-                        bodyMedium: TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.black,
-                        ),
-                        titleMedium: TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.black,
-                        ),
-                      ),
-                      inputDecorationTheme: InputDecorationTheme(
-                        labelStyle: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      colorScheme: ColorScheme.fromSwatch(
-                        primarySwatch: Colors.cyan,
-                      )
-                          .copyWith(
-                            onPrimary: Colors.white,
-                          )
-                          .copyWith(background: Colors.white),
                     ),
-                    surveyProgressbarConfiguration: SurveyProgressConfiguration(
-                      backgroundColor: Colors.white,
-                      label: getLabel()
+                    textButtonTheme: TextButtonThemeData(
+                      style: ButtonStyle(
+                        textStyle: MaterialStateProperty.all(
+                          Theme.of(context).textTheme.labelLarge?.copyWith(
+                                color: Colors.cyan,
+                              ),
+                        ),
+                      ),
                     ),
-                  );
-                }
-                return CircularProgressIndicator.adaptive();
-              },
-            ),
+                    textTheme: TextTheme(
+                      displayMedium: TextStyle(
+                        fontSize: 28.0,
+                        color: Colors.black,
+                      ),
+                      headlineSmall: TextStyle(
+                        fontSize: 24.0,
+                        color: Colors.black,
+                      ),
+                      bodyMedium: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.black,
+                      ),
+                      titleMedium: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                    inputDecorationTheme: InputDecorationTheme(
+                      labelStyle: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    colorScheme: ColorScheme.fromSwatch(
+                      primarySwatch: Colors.cyan,
+                    )
+                        .copyWith(
+                          onPrimary: Colors.white,
+                        )
+                        .copyWith(background: Colors.white),
+                  ),
+                  surveyProgressbarConfiguration: SurveyProgressConfiguration(
+                    backgroundColor: Colors.white,
+                    label: getLabel()
+                  ),
+                );
+              }
+              return CircularProgressIndicator.adaptive();
+            },
           ),
         ),
-      ),
-    );
+      );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   Future<Task> getSampleTask() {
@@ -171,9 +255,15 @@ class _MyAppState extends State<MyApp> {
         ),
         MediaStep(
           title: 'Медиа шаг',
+          showProgress: true,
           elements : [
             StepContent(type: Type.text,content: 'Pinarello dogma'),
-            StepContent(type: Type.image,content: 'https://pro-bike.ru/data/images/posts/47/33047/555.jpg')
+            StepContent(type: Type.image,content: 'https://pro-bike.ru/data/images/posts/47/33047/555.jpg'),
+            StepContent(type: Type.image,content: 'https://pro-bike.ru/data/images/posts/47/33047/555.jpg'),
+            StepContent(type: Type.video,content: 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
+//            StepContent(type: Type.video,content: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')
+            //,
+            //StepContent(type: Type.video,content: 'assets/test.mp4')
           ],
           buttonText: 'Let\'s go!',
         ),
@@ -185,6 +275,19 @@ class _MyAppState extends State<MyApp> {
             hint: 'Введите ваш возраст',
           ),
           isOptional: true,
+        ),
+        MediaStep(
+          title: 'Медиа шаг',
+          showProgress: true,
+          elements : [
+            StepContent(type: Type.text,content: 'Открутите гайку'),
+            StepContent(type: Type.image,content: 'http://remcopy.com/generic/uploaded/xerox_3600/6.png'),
+//            StepContent(type: Type.video,content: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')
+            StepContent(type: Type.youtube,content: 'w7oBdLH49S0'),
+            //,
+            //StepContent(type: Type.video,content: 'assets/test.mp4')
+          ],
+          buttonText: 'Let\'s go!',
         ),
         QuestionStep(
           title: 'Medication?',
@@ -292,4 +395,32 @@ class _MyAppState extends State<MyApp> {
 
   getLabel
       () {"a1";"a2";}
+
+  Container getContent(int selectedIndex) {
+      switch(selectedIndex){
+        case 0:
+          return getSurvey();
+          //Home
+        case 1:
+          return Container(
+              color: Colors.white,
+                child:Text(
+                'Инструкции'
+                ));
+        case 2:
+          return Container(
+              color: Colors.white,
+              child:Text(
+                  'Обучение'
+              ));
+        case 3:
+          return Container(
+              color: Colors.white,
+              child:Text(
+                  'Задачи'
+              ));
+      }
+      return Container(
+          color: Colors.white);
+  }
 }
