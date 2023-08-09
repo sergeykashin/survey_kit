@@ -63,8 +63,28 @@
                     "content": "Для очистки контейнера вам понадобятся:"
                 },
                 {
+                    "type": "text",
+                    "content": "\uD83E\uDE9B Отвертка PZ-5"
+                },
+                {
+                    "type": "text",
+                    "content": "✏️ Карандаш"
+                },
+                {
+                    "type": "text",
+                    "content": "\uD83D\uDD27 Гаечный ключ на 14"
+                },
+                {
+                    "type": "text",
+                    "content": "\uD83D\uDD27 Гаечный ключ на 17"
+                },
+                {
+                    "type": "text",
+                    "content": "\uD83D\uDD27 Гаечный ключ на 19"
+                },
+                {
                     "type": "image",
-                    "content": "https://w7.pngwing.com/pngs/504/732/png-transparent-screwdriver-tool-spanners-screwdriver-technic-logo-screw.png"
+                    "content": "https://cdn.vseinstrumenti.ru/images/goods/ruchnoj-instrument/otvertki/890496/1200x800/54336251.jpg"
                 }
             ],
             "showProgress" : true,
