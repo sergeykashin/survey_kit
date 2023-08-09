@@ -6,6 +6,7 @@ import 'package:survey_kit/src/steps/predefined_steps/completion_step.dart';
 import 'package:survey_kit/src/steps/predefined_steps/instruction_step.dart';
 import 'package:survey_kit/src/steps/predefined_steps/question_step.dart';
 import 'package:survey_kit/src/steps/step_not_defined_exception.dart';
+import 'package:survey_kit/src/steps/predefined_steps/media_step.dart';
 
 abstract class Step {
   final StepIdentifier stepIdentifier;
@@ -34,6 +35,8 @@ abstract class Step {
       return InstructionStep.fromJson(json);
     } else if (type == 'question') {
       return QuestionStep.fromJson(json);
+    } else if (type == 'media') {
+      return MediaStep.fromJson(json);
     } else if (type == 'completion') {
       return CompletionStep.fromJson(json);
     }

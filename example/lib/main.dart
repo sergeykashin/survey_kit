@@ -104,7 +104,7 @@ class _MyAppState extends State<MyApp> {
         child: Align(
           alignment: Alignment.center,
           child: FutureBuilder<Task>(
-            future: getSampleTask(),//getJsonTask(),
+            future: getJsonTask(),//getSampleTask(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done &&
                   snapshot.hasData &&
@@ -387,7 +387,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<Task> getJsonTask() async {
-    final taskJson = await rootBundle.loadString('assets/example_json.json');
+    final taskJson = await rootBundle.loadString('assets/task1.json');
     final taskMap = json.decode(taskJson);
 
     return Task.fromJson(taskMap);

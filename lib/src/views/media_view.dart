@@ -212,10 +212,14 @@ class _MediaViewState extends State<MediaView> {
 
   @override
   void dispose() {
-    if (_controller!.value.isPlaying) _controller!.pause();
+    if (_controller!=null && _controller!.value.isPlaying) {
+      _controller!.pause();
       _controller!.dispose();
-    if (youController!.value.isPlaying) youController!.pause();
+    }
+    if (youController!=null && youController!.value.isPlaying) {
+      youController!.pause();
       youController!.dispose();
+    }
     super.dispose();
   }
 }
