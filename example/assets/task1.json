@@ -1,54 +1,24 @@
 {
     "id": "1234",
     "type": "navigable",
-    "rules": [{
-            "type": "conditional",
-            "triggerStepIdentifier": {
-                "id": "7"
-            },
-            "values": {
-                "Yes": "2",
-                "No": "8"
-            }
-        },
+    "rules": [
         {
             "type": "direct",
             "triggerStepIdentifier": {
                 "id": "1"
             },
             "destinationStepIdentifier": {
-                "id": "3"
+                "id": "2"
             }
         },
         {
             "type": "conditional",
             "triggerStepIdentifier": {
-                "id": "6"
+                "id": "4"
             },
             "values": {
-                "Penicillin": "7",
-                "Penicillin,Latex": "7",
-                "Penicillin,Latex,Pet": "11",
-                "Penicillin,Latex,Pet,Pollen": "11",
-                "Penicillin,Pet": "11",
-                "Penicillin,Pet,Pollen": "11",
-                "Penicillin,Pollen": "7",
-                "Latex": "7",
-                "Latex,Pet": "11",
-                "Latex,Pet,Pollen": "11",
-                "Latex,Pollen": "7",
-                "Pet": "11",
-                "Pet,Pollen": "11",
-                "Pollen": "7"
-            }
-        },
-        {
-            "type": "direct",
-            "triggerStepIdentifier": {
-                "id": "11"
-            },
-            "destinationStepIdentifier": {
-                "id": "7"
+                "Да": "5",
+                "Нет": "6"
             }
         }
     ],
@@ -57,10 +27,10 @@
                 "id": "1"
             },
             "type": "media",
-            "title": "Процедура очистки конвейера",
+            "title": "Процедура очистки станка",
             "elements": [{
                     "type": "text",
-                    "content": "Для очистки контейнера вам понадобятся:"
+                    "content": "Для очистки станка вам понадобятся:"
                 },
                 {
                     "type": "text",
@@ -81,10 +51,6 @@
                 {
                     "type": "text",
                     "content": "\uD83D\uDD27 Гаечный ключ на 19"
-                },
-                {
-                    "type": "image",
-                    "content": "https://cdn.vseinstrumenti.ru/images/goods/ruchnoj-instrument/otvertki/890496/1200x800/54336251.jpg"
                 }
             ],
             "showProgress" : true,
@@ -94,225 +60,100 @@
             "stepIdentifier": {
                 "id": "2"
             },
-            "type": "question",
-            "title": "How old are you?",
-            "answerFormat": {
-                "type": "integer",
-                "defaultValue": 25,
-                "hint": "Please enter your age"
-            }
+            "type": "media",
+            "title": "Открутите гайки",
+            "elements": [{
+                    "type": "text",
+                    "content": "Открутите гайки:"
+                },
+                {
+                    "type": "image",
+                    "content": "https://www.chipmaker.ru/uploads/post/monthly_2011_01/post-29264-089998400%201295081049.jpg"
+                }
+            ],
+            "showProgress" : true,
+            "canGoBack" : true,
+            "buttonText": "Продолжить"
         },
         {
             "stepIdentifier": {
                 "id": "3"
             },
-            "type": "question",
-            "title": "Medication?",
-            "text": "Are you using any medication",
-            "answerFormat": {
-                "type": "bool",
-                "positiveAnswer": "Yes",
-                "negativeAnswer": "No",
-                "result": "POSITIVE"
-            }
+            "type": "media",
+            "title": "Снимите шкив",
+            "elements": [{
+                "type": "text",
+                "content": "Снимите шкив:"
+            },
+                {
+                    "type": "image",
+                    "content": "https://www.chipmaker.ru/uploads/post/monthly_2011_01/post-29264-085591700%201295089286.jpg"
+                }
+            ],
+            "showProgress" : true,
+            "canGoBack" : true,
+            "buttonText": "Продолжить"
         },
         {
             "stepIdentifier": {
                 "id": "4"
             },
             "type": "question",
-            "title": "Tell us about you",
-            "text": "Tell us about yourself and why you want to improve your health.",
+            "title": "Есть износ шкива?",
+            "text": "Есть износ шкива?",
             "answerFormat": {
-                "type": "text",
-                "maxLines": 5,
-                "validationRegEx": "^(?!\\s*\\$).+"
+                "type": "bool",
+                "positiveAnswer": "Да",
+                "negativeAnswer": "Нет",
+                "result": "POSITIVE"
             }
         },
         {
             "stepIdentifier": {
                 "id": "5"
             },
-            "type": "question",
-            "title": "Select your body type",
-            "answerFormat": {
-                "type": "scale",
-                "step": 1,
-                "minimumValue": 1,
-                "maximumValue": 5,
-                "defaultValue": 3,
-                "minimumValueDescription": "1",
-                "maximumValueDescription": "5"
-            }
+            "type": "media",
+            "title": "Замените шкив",
+            "elements": [{
+                "type": "text",
+                "content": "Замените шкив:"
+            },
+                {
+                    "type": "image",
+                    "content": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJlMR1J4HQ11gH0waCxRqidHCFFGRz_D-WYA&usqp=CAU"
+                }
+            ],
+            "showProgress" : true,
+            "canGoBack" : true,
+            "buttonText": "Продолжить"
         },
         {
             "stepIdentifier": {
                 "id": "6"
             },
-            "type": "question",
-            "title": "Known allergies",
-            "answerFormat": {
-                "type": "multiple",
-                "textChoices": [{
-                        "text": "Penicillin",
-                        "value": "Penicillin"
-                    },
-                    {
-                        "text": "Latex",
-                        "value": "Latex"
-                    },
-                    {
-                        "text": "Pet",
-                        "value": "Pet"
-                    },
-                    {
-                        "text": "Pollen",
-                        "value": "Pollen"
-                    }
-                ]
-            }
+            "type": "media",
+            "title": "Нанесите смазку",
+            "elements": [{
+                "type": "text",
+                "content": "Нанесите смазку на фиксирующее кольцо:"
+            },
+                {
+                    "type": "image",
+                    "content": "https://i.ytimg.com/vi/2iBMlMRrmWg/maxresdefault.jpg"
+                }
+            ],
+            "showProgress" : true,
+            "canGoBack" : true,
+            "buttonText": "Продолжить"
         },
         {
             "stepIdentifier": {
                 "id": "7"
             },
-            "type": "question",
-            "title": "Done?",
-            "text": "We are done, do you mind to tell us more about yourself?",
-            "answerFormat": {
-                "type": "single",
-                "textChoices": [{
-                        "text": "Yes",
-                        "value": "Yes"
-                    },
-                    {
-                        "text": "No",
-                        "value": "No"
-                    }
-                ]
-            }
-        },
-        {
-            "stepIdentifier": {
-                "id": "8"
-            },
-            "type": "question",
-            "title": "When did you wake up?",
-            "answerFormat": {
-                "type": "time",
-                "defaultValue": {
-                    "hour": 12,
-                    "minute": 0
-                }
-            }
-        },
-        {
-            "stepIdentifier": {
-                "id": "9"
-            },
-            "type": "question",
-            "title": "When was your last holiday?",
-            "answerFormat": {
-                "type": "date",
-                "minDate": "2015-06-25T04:08:16Z",
-                "maxDate": "2025-06-25T04:08:16Z",
-                "defaultDate": "2021-06-25T04:08:16Z"
-            }
-        },
-        {
-            "stepIdentifier": {
-                "id": "12"
-            },
-            "type": "question",
-            "title": "Known allergies",
-            "answerFormat": {
-                "type": "multiple",
-                "otherField": true,
-                "textChoices": [{
-                        "text": "Penicillin",
-                        "value": "Penicillin"
-                    },
-                    {
-                        "text": "Latex",
-                        "value": "Latex"
-                    },
-                    {
-                        "text": "Pet",
-                        "value": "Pet"
-                    },
-                    {
-                        "text": "Pollen",
-                        "value": "Pollen"
-                    }
-                ]
-            }
-        },
-        {
-            "stepIdentifier": {
-                "id": "13"
-            },
-            "type": "question",
-            "title": "Medicines",
-            "answerFormat": {
-                "type": "multiple_auto_complete",
-                "otherField": true,
-                "textChoices": [{
-                        "text": "Penicillin",
-                        "value": "Penicillin"
-                    },
-                    {
-                        "text": "Latex",
-                        "value": "Latex"
-                    }
-
-                ],
-                "suggestions": [{
-                        "text": "Pet",
-                        "value": "Pet"
-                    },
-                    {
-                        "text": "Pollen",
-                        "value": "Pollen"
-                    }
-                ]
-            }
-        },
-        {
-            "stepIdentifier": {
-                "id": "10"
-            },
             "type": "completion",
-            "text": "Thanks for taking the survey, we will contact you soon!",
-            "title": "Done!",
-            "buttonText": "Restart"
-        },
-        {
-            "stepIdentifier": {
-                "id": "11"
-            },
-            "type": "question",
-            "title": "Pets",
-            "text": "What type of pet(s) do you have?",
-            "answerFormat": {
-                "type": "multiple",
-                "textChoices": [{
-                        "text": "Dog",
-                        "value": "Dog"
-                    },
-                    {
-                        "text": "Cat",
-                        "value": "Cat"
-                    },
-                    {
-                        "text": "Fish",
-                        "value": "Fish"
-                    },
-                    {
-                        "text": "Small Animal",
-                        "value": "Small Animal"
-                    }
-                ]
-            }
+            "text": "Спасибо, что провели сервис станка",
+            "title": "Закончить",
+            "buttonText": "Закончить"
         }
     ]
 }
