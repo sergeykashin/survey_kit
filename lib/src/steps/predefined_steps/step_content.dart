@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'step_content.g.dart';
@@ -6,9 +8,10 @@ part 'step_content.g.dart';
 class StepContent {
   final Type type;
   final String content;
+  final TextAlign textAlign;
 
 
-  StepContent({required this.type, required this.content});
+  StepContent({required this.type, required this.content, this.textAlign = TextAlign.center});
   //
   // Map<String, dynamic> toJson() {
   //   return {

@@ -80,6 +80,7 @@ class _MediaViewState extends State<MediaView> {
         child:SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children:getContentElements(widget.mediaStep.elements,context)
           )
         )
@@ -97,7 +98,7 @@ class _MediaViewState extends State<MediaView> {
             Text(
               element.content,
               style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center
+              textAlign: element.textAlign
             )
           );
           break;
